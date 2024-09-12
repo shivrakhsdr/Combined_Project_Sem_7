@@ -13,9 +13,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 import { executablePath } from "puppeteer";
 
-// const url = "https://books.toscrape.com/";
-// const url = "https://bot.sannysoft.com/";
-
 const get_product_links = async (browser, url) => {
   const page = await browser.newPage();
   await page.goto(url);
@@ -164,30 +161,8 @@ const get_reviews = async (browser, product_review_links) => {
       // console.log(bookData);
 
       if (i == 0) {
-        // fs.writeFile(`data.json`, JSON.stringify(bookData), (err) => {
-        //   if (err) throw err;
-        //   console.log("Successfully saved JSON!");
-        // });
-
         curr = bookData;
       } else {
-        // fs.readFile("data.json", (err, data) => {
-        //   if (err) throw err;
-
-        //   let old_data = JSON.parse(data);
-
-        //   let old_reviews = old_data.reviews;
-
-        //   let updated_reviews = old_reviews.concat(bookData.reviews);
-
-        //   old_data.reviews = updated_reviews;
-
-        //   fs.writeFile(`data.json`, JSON.stringify(old_data), (err) => {
-        //     if (err) throw err;
-        //     console.log("Successfully saved JSON!");
-        //   });
-        // });
-
         let prev_rev = curr.reviews;
         let updated_reviews = prev_rev.concat(bookData.reviews);
 
@@ -239,11 +214,6 @@ const main = async (search_term) => {
 
   // console.log(reviews);
   result = reviews;
-
-  // fs.writeFile(`data.json`, JSON.stringify(reviews), (err) => {
-  //   if (err) throw err;
-  //   console.log("Successfully saved JSON!");
-  // });
 
   await browser.close();
 
