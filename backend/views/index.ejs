@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        margin: 10px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .prod {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <form action="/search" method="POST">
+        <input
+          type="text"
+          id="search"
+          name="search"
+          placeholder="Search for product"
+        />
+
+        <button type="submit">Search</button>
+      </form>
+    </div>
+
+    <% if (locals.result) { %>
+    <div class="container">
+      <% for( let i = 0; i < result.length; i++ ) { %>
+      <div class="prod">
+        <h1><%= result[i].title %></h1>
+        <p>Rs. <%= result[i].price %></p>
+        <a href="<%= result[i].link %>">Link</a>
+        <img src="<%= result[i].image_url %>" height="200" width="200" />
+        <p>Reviews:</p>
+        <% for( let j = 0; j < result[i].reviews.length; j++ ) { %>
+        <p><%= result[i].reviews[j].review %></p>
+        <% } %>
+      </div>
+      <% } %>
+    </div>
+    <% } %>
+  </body>
+</html>
